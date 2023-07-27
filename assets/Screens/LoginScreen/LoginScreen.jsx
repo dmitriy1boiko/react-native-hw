@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -9,7 +8,7 @@ import {
 } from "react-native";
 
 
-export default function App() {
+export default function LoginScreen() {
   
   return (
     <View style={styles.container}>
@@ -17,7 +16,7 @@ export default function App() {
       <StatusBar style="auto" /> */}
       <ImageBackground
         style={styles.image}
-        source={require("./assets/images/PhotoBG.png")}
+        source={require("../../images/PhotoBG.png")}
       >
         <View style={styles.formWrap}>
           <Text>Увійти</Text>

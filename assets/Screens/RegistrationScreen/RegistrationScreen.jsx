@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -8,8 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-
-export default function App() {
+export default function RegistrationScreen() {
   
   return (
     <View style={styles.container}>
@@ -17,12 +15,16 @@ export default function App() {
       <StatusBar style="auto" /> */}
       <ImageBackground
         style={styles.image}
-        source={require("./assets/images/PhotoBG.png")}
+        source={require("../../images/PhotoBG.png")}
       >
         <View style={styles.formWrap}>
-          <Text>Увійти</Text>
+          <Text>Реєстрація</Text>
           <View style={styles.formInputWrap}>
-            
+            <TextInput
+              placeholder="Логін"
+              cursorColor={"#d3d3d3"}
+              style={styles.input}
+            />
 
             <TextInput
               placeholder="Адреса електронної пошти"
@@ -40,11 +42,11 @@ export default function App() {
             </View>
           </View>
           <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
-            <Text style={{ color: "#fff" }}>Увійти</Text>
+            <Text style={{ color: "#fff" }}>Зарегистрироваться</Text>
           </TouchableOpacity>
           <Text>
-          Немає акаунту?
-            <Text>Зареєструватися</Text>
+          Вже є акаунт?
+            <Text>Увійти</Text>
           </Text>
         </View>
       </ImageBackground>
@@ -56,13 +58,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   image: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
-    
+    // alignItems: 'center',
   },
   formWrap: {
     borderTopLeftRadius: 25,
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingBottom: 78,
-    paddingTop: 32,
+    paddingTop: 92,
   },
   input: {
     height: 50,
