@@ -5,40 +5,80 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
+  Platform,
+  KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 
+import { useState } from "react";
+
+const initialState  = {
+  email: "",
+  password: "",
+};
 
 export default function LoginScreen() {
+  const [formState, setFormState] = useState(initialState );
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
+  const keyboardHide = () => {
+    console.log(formState);
+    setFormState(initialState);
+    setIsKeyboardOpen(false);
+    Keyboard.dismiss();
+  };  
   
   return (
-    <View style={styles.container}>
+    <TouchableWithoutFeedback onPress={keyboardHide}>
+    <KeyboardAvoidingView style={styles.container}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}>
       {/* <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" /> */}
       <ImageBackground
         style={styles.image}
         source={require("../../images/PhotoBG.png")}
       >
-        <View style={styles.formWrap}>
+     
+      <View style={{...styles.formWrap, paddingBottom: isKeyboardOpen ? 144 : 32}} >
           <Text>Увійти</Text>
           <View style={styles.formInputWrap}>
             
 
             <TextInput
+            placeholderTextColor={"#BDBDBD"}
               placeholder="Адреса електронної пошти"
               cursorColor={"#d3d3d3"}
               style={styles.input}
+              onFocus={() => setIsKeyboardOpen(true)}
+              value={formState.email}
+              onChangeText={(value) =>
+                    setFormState((prevState) => ({
+                      ...prevState,
+                      email: value,
+                    }))
+                  }
             />
 
             <View style={styles.passwordContainer}>
               <TextInput
+              placeholderTextColor={"#BDBDBD"}
                 secureTextEntry={true}
                 style={[styles.input, styles.passwordInput]}
                 placeholder="Пароль"
                 cursorColor={"#d3d3d3"}
+                onFocus={() => setIsKeyboardOpen(true)}
+                value={formState.password}
+                onChangeText={(value) =>
+                      setFormState((prevState) => ({
+                        ...prevState,
+                        password: value,
+                      }))
+                    }
               />
             </View>
           </View>
-          <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={keyboardHide}>
             <Text style={{ color: "#fff" }}>Увійти</Text>
           </TouchableOpacity>
           <Text>
@@ -46,8 +86,11 @@ export default function LoginScreen() {
             <Text>Зареєструватися</Text>
           </Text>
         </View>
+      
+        
       </ImageBackground>
-    </View>
+    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }
 

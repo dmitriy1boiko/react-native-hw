@@ -5,11 +5,35 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
+  Platform,
+  KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 
+import { useState } from "react";
+
+const initialState = {
+  login: "",
+  email: "",
+  password: "",
+};
+
 export default function RegistrationScreen() {
+  const [formState, setFormState] = useState(initialState );
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   
+  const keyboardHide = () => {
+    console.log(formState);
+    setFormState(initialState);
+    setIsKeyboardOpen(false);
+    Keyboard.dismiss();
+  };
+
   return (
+    <KeyboardAvoidingView style={styles.container}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}>
+    <TouchableWithoutFeedback onPress={keyboardHide}>
     <View style={styles.container}>
       {/* <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" /> */}
@@ -17,40 +41,68 @@ export default function RegistrationScreen() {
         style={styles.image}
         source={require("../../images/PhotoBG.png")}
       >
-        <View style={styles.formWrap}>
-          <Text>Реєстрація</Text>
+        <View style={{...styles.formWrap, paddingBottom: isKeyboardOpen ? 32 : 144}}>
+          <Text>Увійти</Text>
           <View style={styles.formInputWrap}>
-            <TextInput
-              placeholder="Логін"
-              cursorColor={"#d3d3d3"}
-              style={styles.input}
-            />
+          <TextInput
+                  style={styles.input}
+                  placeholderTextColor={"#BDBDBD"}
+                  placeholder="Логін"
+                  value={formState.login}
+                  maxLength={16}
+                  onChangeText={(value) =>
+                    setFormState((prevState) => ({
+                      ...prevState,
+                      login: value,
+                    }))
+                  }
+                />
 
             <TextInput
+            placeholderTextColor={"#BDBDBD"}
               placeholder="Адреса електронної пошти"
               cursorColor={"#d3d3d3"}
               style={styles.input}
+              onFocus={() => setIsKeyboardOpen(true)}
+              value={formState.email}
+              onChangeText={(value) =>
+                    setFormState((prevState) => ({
+                      ...prevState,
+                      email: value,
+                    }))
+                  }
             />
 
             <View style={styles.passwordContainer}>
               <TextInput
+              placeholderTextColor={"#BDBDBD"}
                 secureTextEntry={true}
                 style={[styles.input, styles.passwordInput]}
                 placeholder="Пароль"
                 cursorColor={"#d3d3d3"}
+                onFocus={() => setIsKeyboardOpen(true)}
+                value={formState.password}
+                onChangeText={(value) =>
+                      setFormState((prevState) => ({
+                        ...prevState,
+                        password: value,
+                      }))
+                    }
               />
             </View>
           </View>
-          <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
-            <Text style={{ color: "#fff" }}>Зарегистрироваться</Text>
+          <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={keyboardHide}>
+            <Text style={{ color: "#fff" }}>Увійти</Text>
           </TouchableOpacity>
           <Text>
-          Вже є акаунт?
-            <Text>Увійти</Text>
+          Немає акаунту?
+            <Text>Зареєструватися</Text>
           </Text>
         </View>
       </ImageBackground>
     </View>
+    </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -73,7 +125,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    paddingBottom: 78,
     paddingTop: 92,
   },
   input: {
