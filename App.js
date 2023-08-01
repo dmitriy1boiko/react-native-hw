@@ -1,150 +1,42 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  TextInput,
-  TouchableOpacity,
-  Platform,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 
-import { useState} from "react";
+import "react-native-gesture-handler";
 
-const initialState = {
-  email: "",
-  password: "",
-};
+import { useRoute } from "./router";
+
+
 
 
 export default function App() {
-  const [formState, setFormState] = useState(initialState );
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-  
-  const keyboardHide = () => {
-    console.log(formState);
-    setFormState(initialState);
-    setIsKeyboardOpen(false);
-    Keyboard.dismiss();
-  };
+  const routing = useRoute(true)
   return (
-    <KeyboardAvoidingView style={styles.container}
-    behavior={Platform.OS === "ios" ? "padding" : "height"}>
-    <TouchableWithoutFeedback onPress={keyboardHide}>
-    <View style={styles.container}>
-      {/* <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" /> */}
-      <ImageBackground
-        style={styles.image}
-        source={require("./assets/images/PhotoBG.png")}
+    <NavigationContainer>
+    {routing}
+      {/* <Tabs.Navigator>
+        <Tabs.Screen 
+        name="PostsScreen" 
+        component={PostsScreen}
+        ></Tabs.Screen>
+        <Tabs.Screen 
+        name="CreatePostsScreen" 
+        component={CreatePostsScreen}
+        ></Tabs.Screen>
+        <Tabs.Screen 
+        name="ProfileScreen" 
+        component={ProfileScreen}
+        ></Tabs.Screen>
+      </Tabs.Navigator> */}
+
+      {/* <Stack.Navigator
+        initialRouteName="LoginScreen"
+        screenOptions={{ headerShown: false }}
       >
-        <View style={{...styles.formWrap, paddingBottom: isKeyboardOpen ? 32 : 144}}>
-          <Text>Увійти</Text>
-          <View style={styles.formInputWrap}>
-            
-
-            <TextInput
-              placeholder="Адреса електронної пошти"
-              cursorColor={"#d3d3d3"}
-              style={styles.input}
-              onFocus={() => setIsKeyboardOpen(true)}
-              value={formState.email}
-              onChangeText={(value) =>
-                    setFormState((prevState) => ({
-                      ...prevState,
-                      email: value,
-                    }))
-                  }
-            />
-
-            <View style={styles.passwordContainer}>
-              <TextInput
-                secureTextEntry={true}
-                style={[styles.input, styles.passwordInput]}
-                placeholder="Пароль"
-                cursorColor={"#d3d3d3"}
-                onFocus={() => setIsKeyboardOpen(true)}
-                value={formState.password}
-                onChangeText={(value) =>
-                      setFormState((prevState) => ({
-                        ...prevState,
-                        password: value,
-                      }))
-                    }
-              />
-            </View>
-          </View>
-          <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={keyboardHide}>
-            <Text style={{ color: "#fff" }}>Увійти</Text>
-          </TouchableOpacity>
-          <Text>
-          Немає акаунту?
-            <Text>Зареєструватися</Text>
-          </Text>
-        </View>
-      </ImageBackground>
-    </View>
-    </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+        <Stack.Screen
+          name="RegistrationScreen"
+          component={RegistrationScreen}
+        />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      </Stack.Navigator> */}
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    
-  },
-  image: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "flex-end",
-    
-  },
-  formWrap: {
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 32,
-  },
-  input: {
-    height: 50,
-    paddingLeft: 16,
-
-    backgroundColor: "#F6F6F6",
-    color: "#212121",
-
-    borderWidth: 1,
-    borderRadius: 8,
-
-    borderColor: "#E8E8E8",
-    marginHorizontal: 16,
-  },
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  passwordInput: {
-    flex: 1,
-  },
-  formInputWrap: {
-    gap: 16,
-    width: "100%",
-    marginTop: 32,
-  },
-  btn: {
-    marginTop: 43,
-    backgroundColor: "#FF6C00",
-
-    paddingHorizontal: 32,
-    paddingVertical: 16,
-
-    borderRadius: 100,
-    marginBottom: 16,
-  },
-});
