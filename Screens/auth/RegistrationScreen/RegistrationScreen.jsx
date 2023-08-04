@@ -13,6 +13,7 @@ import {
 
 import { useState } from "react";
 
+
 const initialState = {
   login: "",
   email: "",
@@ -27,6 +28,7 @@ export default function RegistrationScreen({ navigation }) {
     console.log(formState);
     setFormState(initialState);
     setIsKeyboardOpen(false);
+    // navigation.navigate("Home")
     Keyboard.dismiss();
   };
 
@@ -49,7 +51,7 @@ export default function RegistrationScreen({ navigation }) {
                 paddingBottom: isKeyboardOpen ? 32 : 144,
               }}
             >
-              <Text>Реєстрація</Text>
+              <Text style={styles.hederText} onPress={() => navigation.navigate("LoginScreen")}>Реєстрація</Text>
               <View style={styles.formInputWrap}>
                 <TextInput
                   style={styles.input}
@@ -185,5 +187,8 @@ const styles = StyleSheet.create({
 
     borderRadius: 100,
     marginBottom: 16,
+  },
+  hederText:{
+    fontSize:16,
   },
 });

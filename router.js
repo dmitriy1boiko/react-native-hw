@@ -6,18 +6,22 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
-import LoginScreen from "./assets/Screens/auth/LoginScreen/LoginScreen";
-import RegistrationScreen from "./assets/Screens/auth/RegistrationScreen/RegistrationScreen";
-import PostsScreen from "./assets/Screens/mainScreen/PostsScreen";
-import CreatePostsScreen from "./assets/Screens/mainScreen/CreatePostsScreen";
-import ProfileScreen from "./assets/Screens/mainScreen/ProfileScreen";
+import LoginScreen from "./Screens/auth/LoginScreen/LoginScreen";
+import RegistrationScreen from "./Screens/auth/RegistrationScreen/RegistrationScreen";
+ import PostsScreen from "./Screens/mainScreen/PostsScreen";
+import CreatePostsScreen from "./Screens/mainScreen/CreatePostsScreen";
+import ProfileScreen from "./Screens/mainScreen/ProfileScreen";
+import Home from "./Screens/nestedScriins/Home";
 
 import { AntDesign, Entypo } from "@expo/vector-icons";
 
-export const useRoute = (isAuth) => {
+
+
+export const useRoute = (isAuth , setLoading) => {
   if (!isAuth) {
     return (
       <Stack.Navigator
+
         initialRouteName="LoginScreen"
         screenOptions={{ headerShown: false }}
       >
@@ -37,12 +41,13 @@ export const useRoute = (isAuth) => {
     >
       <Tabs.Screen
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <AntDesign name="appstore-o" size={24} color="black" />
           ),
         }}
-        name="PostsScreen"
-        component={PostsScreen}
+        name="Home"
+        component={Home}
       ></Tabs.Screen>
       <Tabs.Screen
         options={{

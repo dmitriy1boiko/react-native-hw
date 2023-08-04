@@ -1,7 +1,12 @@
+import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+
+
+
 
 export default function PostsScreen() {
   return (
+
     <View style={{ paddingHorizontal: 16, paddingTop: 44 }}>
     <Text style={styles.profileHeader}>Публікації</Text>
       <View style={styles.profileWrap}>

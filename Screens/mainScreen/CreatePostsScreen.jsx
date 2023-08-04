@@ -5,7 +5,7 @@ import { Text, View , StyleSheet} from "react-native";
 export default function CreatePostsScreen() {
   return (
     <View style={styles.container}>
-      <Text>CreatePostsScree</Text>
+      <Text>CreatePostsScreen</Text>
     </View>
   );
 }

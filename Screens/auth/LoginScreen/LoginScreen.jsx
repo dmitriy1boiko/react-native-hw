@@ -13,19 +13,23 @@ import {
 
 import { useState } from "react";
 
+
 const initialState = {
   email: "",
   password: "",
 };
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen({ navigation, setLoading}) {
   const [formState, setFormState] = useState(initialState);
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   const keyboardHide = () => {
+    // setLoading(true);
+    // navigation.navigate("Home");
     console.log(formState);
     setFormState(initialState);
     setIsKeyboardOpen(false);
+    
     Keyboard.dismiss();
   };
 
@@ -47,7 +51,7 @@ export default function LoginScreen({ navigation }) {
               paddingBottom: isKeyboardOpen ? 144 : 32,
             }}
           >
-            <Text>Увійти</Text>
+            <Text style={styles.hederText} onPress={() => navigation.navigate("RegistrationScreen")}>Увійти</Text>
             <View style={styles.formInputWrap}>
               <TextInput
                 placeholderTextColor={"#BDBDBD"}
@@ -162,5 +166,8 @@ const styles = StyleSheet.create({
 
     borderRadius: 100,
     marginBottom: 16,
+  },
+  hederText:{
+    fontSize:16,
   },
 });

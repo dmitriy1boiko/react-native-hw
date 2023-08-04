@@ -2,10 +2,10 @@ import React from "react";
 
 import { Text, View , StyleSheet} from "react-native";
 
-export default function PostsScreen () {
+export default function MapScreen() {
   return (
     <View style={styles.container}>
-      <Text>PostsScreen </Text>
+      <Text>MapScreen</Text>
     </View>
   );
 }
