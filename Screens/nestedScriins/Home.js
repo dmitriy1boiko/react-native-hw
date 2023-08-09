@@ -1,4 +1,3 @@
-// import { Text, View, StyleSheet } from "react-native";
 import PostsScreen from "../mainScreen/PostsScreen";
 import CommentsScreen from "../nestedScriins/CommentsScreen";
 import MapScreen from "../nestedScriins/MapScreen";

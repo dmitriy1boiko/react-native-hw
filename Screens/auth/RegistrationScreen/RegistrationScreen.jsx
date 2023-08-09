@@ -20,12 +20,13 @@ const initialState = {
   password: "",
 };
 
-export default function RegistrationScreen({ navigation }) {
+export default function RegistrationScreen({ navigation,setIsLoggedIn }) {
   const [formState, setFormState] = useState(initialState);
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   const keyboardHide = () => {
     console.log(formState);
+    setIsLoggedIn(prevState=>!prevState)
     setFormState(initialState);
     setIsKeyboardOpen(false);
     // navigation.navigate("Home")
