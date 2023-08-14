@@ -41,6 +41,7 @@ export default function Home({setIsLoggedIn}) {
       component={PostsScreen} />
 
       <Tab.Screen options={{
+        title:"Створити публікацію",
         tabBarIcon:({ focused, color, size })=> <IconWrap isActive={focused} type={"addPost"}/>,
       }} 
       name="CreatePostsScreen" 

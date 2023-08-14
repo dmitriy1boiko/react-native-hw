@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
+
 import { useState } from "react";
 
 
@@ -73,7 +74,7 @@ export default function RegistrationScreen({ navigation,setIsLoggedIn }) {
                   placeholder="Адреса електронної пошти"
                   cursorColor={"#d3d3d3"}
                   style={styles.input}
-                  onFocus={() => setIsKeyboardOpen(true)}
+                  onPress={keyboardHide}
                   value={formState.email}
                   onChangeText={(value) =>
                     setFormState((prevState) => ({
